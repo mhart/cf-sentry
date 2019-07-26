@@ -1,6 +1,6 @@
 {
   "name": "{{ project-name }}",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A template to create a Cloudflare worker that logs errors to Sentry",
   "main": "index.js",
   "scripts": {
