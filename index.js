@@ -1,11 +1,19 @@
+import { log } from './sentry'
+
 addEventListener('fetch', event => {
-  event.respondWith(handleRequest(event.request))
+  event.respondWith(async () => {
+    try {
+      const res = await handleRequest(event.request)
+      return res
+    } catch (e) {
+      event.waitUntil(log(e, event.request))
+      return new Response(e.msg || 'An error occurred!', { status: e.statusCode || 500 })
+    }
+  })
 })
 
-/**
- * Fetch and log a request
- * @param {Request} request
- */
 async function handleRequest(request) {
+  // To test:
+  // throw new Error('Oh no!')
   return new Response('Hello worker!', { status: 200 })
 }
