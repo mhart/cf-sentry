@@ -1,15 +1,17 @@
 import { log } from './sentry'
 
 addEventListener('fetch', event => {
-  event.respondWith(async () => {
-    try {
-      const res = await handleRequest(event.request)
-      return res
-    } catch (e) {
-      event.waitUntil(log(e, event.request))
-      return new Response(e.message || 'An error occurred!', { status: e.statusCode || 500 })
-    }
-  })
+  event.respondWith(
+    (async () => {
+      try {
+        const res = await handleRequest(event.request)
+        return res
+      } catch (e) {
+        event.waitUntil(log(e, event.request))
+        return new Response(e.message || 'An error occurred!', { status: e.statusCode || 500 })
+      }
+    })(),
+  )
 })
 
 async function handleRequest(request) {
