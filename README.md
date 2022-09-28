@@ -5,7 +5,7 @@ that logs errors to [Sentry](https://sentry.io).
 
 ## Generating
 
-Use [wrangler](https://github.com/cloudflare/wrangler)
+Use [wrangler](https://github.com/cloudflare/wrangler2#readme)
 
 ```
 wrangler generate projectname https://github.com/bustle/cf-sentry
@@ -39,10 +39,10 @@ const TAGS = { app: APP }
 const SERVER_NAME = `${APP}-${ENV}`
 ```
 
-Then you can build your project, publish it, etc with `wrangler`:
+Then you can develop and publish it with `wrangler`:
 ```
 cd projectname
-wrangler build
+wrangler publish
 ```
 
 ## License
